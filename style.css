@@ -1,0 +1,283 @@
+:root {
+    --gris: rgb(41, 41, 41)
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--gris);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+    font-family: "Outfit";
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+#navbar {
+    height: 60px;
+    background-color: var(--gris);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    color: white;
+    border-bottom: 2px white solid;
+}
+
+#navbar a {
+    text-decoration: none;
+    color: white;
+}
+
+#header {
+    height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: url(images/image_header.jpg);
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+#header h1 {
+    font-size: 35px;
+    width: 60vw;
+    margin: 0;
+    text-align: center;
+}
+
+#header h5 {
+    margin: 10px;
+}
+
+#mouse svg {
+    fill: white;
+    margin-top: 30px;
+}
+
+#mouse svg:hover {
+    cursor: pointer;
+}
+
+.texte-intro {
+    padding: 100px 0 60px 0;
+    width: 75vw;
+    margin: 0 auto;
+    text-align: justify;
+    line-height: 1.5;
+}
+
+.sources {
+    font-size: 9px;
+}
+
+.sources a {
+    color: var(--gris);
+}
+
+.graphiquePtsRecharge {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    gap: 70px;
+    padding: 70px 0;
+}
+
+.tableau-bouton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    gap: 30px;
+}
+
+table {
+    border: 2px black solid;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid black;
+    font-size: 12px;
+    text-align: center;
+    padding: 3px;
+}
+
+button {
+    background-color: var(--gris);
+    font-family: "Outfit";
+    color: white;
+    border: none;
+    width: 300px;
+    height: 40px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+#parcAuto {
+    margin-top: 40px;
+}
+
+.camembert {
+    margin: 0 auto;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    width: 75vw;
+    height: 60vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#parcAutoElecGraph{
+    height: 350px;
+    width: 500px;
+}
+#camembertChart{
+    height: 450px;
+    width: 450px;
+}
+
+.parcAutoElec {
+    margin-left: 65px;
+}
+
+.stats-camembert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    width: 20%;
+}
+
+select,
+option {
+    font-family: 'Outfit';
+}
+
+.bornes-regions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 60px;
+    height: 100vh;
+    margin: 60px 0 0 0 ;
+}
+
+footer {
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    background-color: var(--gris);
+    color: white;
+}
+
+footer a {
+    color: white;
+}
+
+/*------------- map -------------*/
+
+#svg {
+    display: block;
+    margin: auto;
+}
+
+/** La souris change pour un curseur sur un département et le contour est noir avec une épaisseur assez fine */
+.department {
+    cursor: pointer;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: black;
+    stroke-width: .5px;
+    border-radius: .2px;
+}
+
+/** Au survol d'un département le contour devient plus épais */
+.department:hover {
+    stroke-width: 1px;
+}
+/* .department:hover .map-tooltip{
+    padding: 10px!important;
+} */
+
+/** Le tooltip est défini avec des propriétés statiques qui conviennent à nos données */
+.map-tooltip {
+    position: absolute;
+    text-align: center;
+    z-index: 1000;
+    color: white;
+    font-family: 'Outfit';
+    font-size: 12px;
+    background: var(--gris);
+    border: 0px;
+    padding: 10px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+g{
+    font-family: 'Outfit';
+}
+
+.q0-9 {
+    fill: #f7fbff;
+}
+
+.q1-9 {
+    fill: #deebf7;
+}
+
+.q2-9 {
+    fill: #c6dbef;
+}
+
+.q3-9 {
+    fill: #9ecae1;
+}
+
+.q4-9 {
+    fill: #6baed6;
+}
+
+.q5-9 {
+    fill: #4292c6;
+}
+
+.q6-9 {
+    fill: #2171b5;
+}
+
+.q7-9 {
+    fill: #08519c;
+}
+
+.q8-9 {
+    fill: #08306b;
+}

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script type="module" src="./js/regions.js"></script>
+    <script type="module" src="./js/ptsRecharges.js"></script>
+    <script type="module" src="./js/camembert.js"></script>
+    <script type="module" src="./js/statsCamembert.js"></script>
+    <script type="module" src="./js/parcAutoElec.js"></script>
+    <script type="module" src="./js/map.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <title>SAE 303 - Q.BUTEAU | E.ROZIER</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <a href="#header">
+            <h3 style="font-size: 23px;">SAE 303</h3>
+        </a>
+        <h4>Q.BUTEAU & E.ROZIER</h4>
+    </nav>
+
+    <header id="header">
+        <h1>Véhicules électriques et automobile propre : Avancée durable ou piège environnemental ?</h1>
+        <h5>SAE 303 | Quentin Buteau & Emilien Rozier - TPA</h5>
+        <div id="mouse">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path
+                    d="M12 2c3.309 0 6 2.691 6 6v8c0 3.309-2.691 6-6 6s-6-2.691-6-6v-8c0-3.309 2.691-6 6-6zm0-2c-4.418 0-8 3.582-8 8v8c0 4.418 3.582 8 8 8s8-3.582 8-8v-8c0-4.418-3.582-8-8-8zm0 9c-.829 0-1.5-.672-1.5-1.5s.671-1.5 1.5-1.5 1.5.672 1.5 1.5-.671 1.5-1.5 1.5z" />
+            </svg>
+        </div>
+    </header>
+
+    <p class="texte-intro" id="intro">En France, le secteur des transports représente une part considérable des émissions de
+        dioxyde de carbone (CO2),
+        nécessitant une transition vers une mobilité plus durable. Le gouvernement s'est engagé à mettre fin à la vente
+        de véhicules utilisant des énergies fossiles d'ici 2040, ce qui a entraîné une forte augmentation des
+        immatriculations
+        de véhicules électriques depuis 2020. Toutefois, pour soutenir cette transition, le développement des
+        infrastructures
+        de recharge est crucial. Ce projet examine l'évolution des infrastructures de recharge en France par rapport au
+        nombre
+        croissant de véhicules électriques, aux objectifs à atteindre d'ici 2030, ainsi qu'à d'autres indicateurs
+        pertinents.
+        En outre, il évalue si la répartition de ces infrastructures est alignée avec la distribution de la population
+        et le
+        volume de trafic routier sur le territoire français.
+    </p>
+
+    <div class="camembert">
+        <div class="parcAutoElec" style="width: 50%">
+            <canvas id="parcAutoElecGraph"></canvas>
+        </div>
+        <div class="graphiqueEvoParcAutoFr" style="width: 40%">
+            <canvas id="camembertChart"></canvas>
+        </div>
+        <div class="stats-camembert">
+            <!-- <h3>Sélectionnez une année :</h3> -->
+            <select name="years" id="year-select">
+                <option value="0">2011</option>
+                <option value="1">2012</option>
+                <option value="2">2013</option>
+                <option value="3">2014</option>
+                <option value="4">2015</option>
+                <option value="5">2016</option>
+                <option value="6">2017</option>
+                <option value="7">2018</option>
+                <option value="8">2019</option>
+                <option value="9">2020</option>
+                <option value="10">2021</option>
+                <option value="11">2022</option>
+            </select>
+            <ul style="list-style: none; font-size: 13px; padding: 0;">
+                <li id="Diesel">Diesel : <strong><span></span> %</strong></li>
+                <li id="Essence">Essence : <strong><span></span> %</strong></li>
+                <li id="Electrique">Electrique : <strong><span></span> %</strong></li>
+                <li id="Gaz">Gaz : <strong><span></span> %</strong></li>
+                <li id="Hybride_rechargeable">Hybride rechargeable : <strong><span></span> %</strong></li>
+            </ul>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; width: 40%;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Années</th>
+                        <th>Diesel</th>
+                        <th>Essence</th>
+                        <th>Électrique</th>
+                        <th>Gaz</th>
+                        <th>Hybride<br>rechargeable</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>
+            <p class="sources">Sources :
+                <a href="https://www.chartjs.org/" target="_blank">Librairie Chart.js</a> |
+                <a href="https://e-cartomobile.vercel.app/">E-CartoMobile</a>
+            </p>
+            <button id="parcAuto">Afficher le parc automobile électrique</button>
+        </div>
+    </div>
+
+    <div class="graphiquePtsRecharge">
+        <div class="tableau-bouton">
+            <table>
+                <tr>
+                    <th>Années</th>
+                    <th>Points de recharge<br>(actuels et prévisionnels)</th>
+                </tr>
+                <tr>
+                    <td>2016</td>
+                    <td>14 799</td>
+                </tr>
+                <tr>
+                    <td>2017</td>
+                    <td>20 048</td>
+                </tr>
+                <tr>
+                    <td>2018</td>
+                    <td>24 808</td>
+                </tr>
+                <tr>
+                    <td>2019</td>
+                    <td>28 666</td>
+                </tr>
+                <tr>
+                    <td>2020</td>
+                    <td>32 706</td>
+                </tr>
+                <tr>
+                    <td>2021</td>
+                    <td>53 667</td>
+                </tr>
+                <tr>
+                    <td>2022</td>
+                    <td>82 107</td>
+                </tr>
+                <tr style="border-bottom: 2px black solid;">
+                    <td>5 mai 2023</td>
+                    <td><strong>100 000</strong></td>
+                </tr>
+                <tr>
+                    <td>2024</td>
+                    <td>160 000</td>
+                </tr>
+                <tr>
+                    <td>2025</td>
+                    <td>215 000</td>
+                </tr>
+                <tr>
+                    <td>2026</td>
+                    <td>240 000</td>
+                </tr>
+                <tr>
+                    <td>2027</td>
+                    <td>270 000</td>
+                </tr>
+                <tr>
+                    <td>2028</td>
+                    <td>310 000</td>
+                </tr>
+                <tr>
+                    <td>2029</td>
+                    <td>350 000</td>
+                </tr>
+                <tr>
+                    <td>2030</td>
+                    <td>400 000</td>
+                </tr>
+            </table>
+            <button id="previsionsRecharges">Afficher les prévisions 2024-2030</button>
+        </div>
+        <div class="graphiques" style="height: 30%; width: 50%;">
+            <canvas id="ptsRecharges"></canvas>
+            <p class="sources">Sources :
+                <a href="https://www.chartjs.org/" target="_blank">Librairie Chart.js</a> |
+                <a href="https://fr.statista.com/statistiques/1052382/vehicule-electrique-point-recharge-disponible-france/"
+                    target="_blank">
+                    Statista : Évolution du nombre de points de recharge pour véhicules électriques ouverts au public en
+                    France entre 2014 et 2022</a>
+                | <a href="https://www.lesfurets.com/assurance-auto/actualites/100-000-bornes-de-recharge-lobjectif-est-enfin-atteint-en-france"
+                    target="_blank">
+                    Les Furets : 100 000 bornes de recharge : l’objectif est enfin atteint en France</a>
+                | <a href="https://www.filiere-3e.fr/2023/10/25/c-molizon-avere-france-400-000-points-de-recharge-2030-mobilite-electrique/#:~:text=C.%20M.%20%E2%80%93%20Le%20pr%C3%A9sident%20de%20la,fait%20atteignable%20au%20rythme%20actuel."
+                    target="_blank">
+                Filière3e : Clément Molizon, Avere-France : « Le président de la République a annoncé un nouvel objectif de 400 000 points de recharge publics pour 2030. »</a>
+        </div>
+    </div>
+
+    <div class="bornes-regions">
+        <div class="bornes-regions__graphiques" style="width: 40%;">
+            <canvas id="bornesRegions"></canvas>
+            <canvas id="ratioBornesVoitures"></canvas>
+        </div>
+        <div class="tableau-bouton">
+            <table>
+                <tr>
+                    <th>Régions</th>
+                    <th>Bornes de recharge (2021)</th>
+                    <th>Bornes de recharge (2023)</th>
+                    <th>Taux de bornes par voiture (2021)</th>
+                    <th>Taux de bornes par voiture (2023)</th>
+                </tr>
+
+                <script>
+                    const data2021 = {
+                        labels: ["Auvergne-Rhône-Alpes", "Bourgogne-Franche-Comté", "Bretagne", "Centre-Val de Loire", "Corse", "Grand Est", "Hauts-de-France", "Île-de-France", "Normandie", "Nouvelle-Aquitaine", "Occitanie", "Pays de la Loire", "Provence-Alpes-Côte d'Azur"],
+                        bornesRegions: ["4 787", "1 616", "1 942", "1 763", 293, "3 639", "3 568", "4 905", "2 446", "3 915", "4 044", "2 046", "3 502"],
+                        bornesVoitures: [18.3, 12.2, 13.5, 12.2, 20.9, 15.5, 12, 16.2, 12.2, 14.3, 9.4, 16.1, 15.7]
+                    };
+
+                    const data2023 = {
+                        labels: ["Auvergne-Rhône-Alpes", "Bourgogne-Franche-Comté", "Bretagne", "Centre-Val de Loire", "Corse", "Grand Est", "Hauts-de-France", "Île-de-France", "Normandie", "Nouvelle-Aquitaine", "Occitanie", "Pays de la Loire", "Provence-Alpes-Côte d'Azur"],
+                        bornesRegions: ["12 119", "4 169", "4 437", "4 439", 781, "9 672", "9 399", "19 125", "5 704", "9 924", "10 154", "5 077", "9 249"],
+                        bornesVoitures: [15.8, 11.6, 14.2, 11, 19.8, 11.9, 11.7, 16.4, 11.7, 12.7, 10.7, 14.8, 16.2],
+                    };
+
+                    for (let i = 0; i < data2021.labels.length; i++) {
+                        document.write("<tr>");
+                        document.write("<td>" + data2021.labels[i] + "</td>");
+                        document.write("<td>" + data2021.bornesRegions[i] + "</td>");
+                        document.write("<td>" + data2023.bornesRegions[i] + "</td>");
+                        document.write("<td>" + data2021.bornesVoitures[i] + "</td>");
+                        document.write("<td>" + data2023.bornesVoitures[i] + "</td>");
+                        document.write("</tr>");
+                    }
+                </script>
+            </table>
+            <p class="sources" style="margin: 0;">Sources : <a href="https://www.chartjs.org/" target="_blank">Librairie
+                    Chart.js</a> | 
+                    <a href="https://lemag.gueudet.fr/actualites/bornes-de-recharge-electriques-quelles-regions-en-possedent-le-plus-4966.html#:~:text=Le%20classement%20r%C3%A9gional%20des%20bornes,Occitanie%20(10%20154%20points)"
+                    target="_blank">
+                    Gueudet : Bornes de recharge électriques : quelles régions en possèdent le plus ?</a>
+                | <a href="https://ufe-electricite.fr/watt-the-carte/deploiement-bornes-de-recharge-en-france/"
+                    target="_blank">
+                    UFE : Déploiement des bornes de recharge en France</a></p>
+            <button id="bornesApres">Statistiques en septembre 2023</button>
+        </div>
+    </div>
+
+    <h2 style="text-align: center; margin: 0; margin-top: 30px;">Nombre de voiture par borne par région en 2023</h2>
+    <div id="map"></div>
+
+    <footer id="footer">
+        <h6>WS303 - Concevoir des visualisations de données pour le web et une application interactive</h6>
+        <h6>&copy; 2023 | <a href="http://mmi22c03.mmi-troyes.fr/portfolio" target="_blank">Q.BUTEAU</a> & <a
+                href="https://github.com/EmilienRozier" target="_blank">E.ROZIER</a> - Tous droits réservés</h6>
+    </footer>
+
+    <!--script-->
+
+    <script>
+        const mouse = document.getElementById('mouse');
+        mouse.addEventListener('click', () => {
+            document.getElementById('intro').scrollIntoView({ behavior: 'smooth' });
+        })
+    </script>
+</body>
+
+</html>
