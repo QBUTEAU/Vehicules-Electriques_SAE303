@@ -9,7 +9,7 @@ La SAE 303 était un projet sur la réalisation d'un site web interactif qui pr�
 **Emilien Rozier** et **Quentin Buteau**<br>
 ---> Interface du site, rédactionnel et graphiques.
 
-### 💻 Technologies utilisés :
+### 💻 Langages et bibliothèque utilisés :
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
