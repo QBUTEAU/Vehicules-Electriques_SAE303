@@ -3,10 +3,10 @@
 Projet universitaire réalisé lors du semestre 3 du BUT Métiers du Multimédia et de l'Internet, parcours Développement Web et Dispositifs Interactifs (WS303D -  Concevoir des visualisations de données pour le web et une application interactive).
 
 ### 📜 Description :
-La SAE 303 était un projet sur la réalisation d'un site web interactif qui présente des statistiques sur les infrastructures de recharge de véhicules électriques et le développement de la mobilité électrique, de nos jours et les projections pour 2030. Le tout en récoltant des informations officielles sur différents sites (Gouvernements et sources officiels)
+La SAE 303 était un projet sur la réalisation d'un site web interactif qui présente des statistiques sur les infrastructures de recharge de véhicules électriques et le développement de la mobilité électrique, de nos jours et les projections pour 2030. Le tout en récoltant des informations officielles sur différents sites (Gouvernements et sources officielles).
 
 ### 👥 Membres et parties réalisées :
-**Emilien Rozier** et **Quentin Buteau**
+**Emilien Rozier** et **Quentin Buteau**<br>
 ---> Interface du site, rédactionnel et graphiques.
 
 ### 💻 Technologies utilisés :
